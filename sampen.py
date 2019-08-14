@@ -9,7 +9,7 @@ import numpy as np
 import math
 
 def sampen(sig,ordr,tor):
-    # sig: the input signal or series
+    # sig: the input signal or series, it should be numpy array with type float
     # ordr: order, the length of template
     # tor: percent of standard deviation
     
@@ -26,7 +26,10 @@ def sampen(sig,ordr,tor):
                 matchnum+=1
     
     allnum = (n-ordr+1)*(n-ordr)/2
-    sen = -math.log(matchnum/allnum)
+    if matchnum<0.1:
+        sen = 1000.0
+    else:
+        sen = -math.log(matchnum/allnum)
     return sen
 
 if __name__=="__main__":
